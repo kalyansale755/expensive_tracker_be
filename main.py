@@ -1,18 +1,30 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import mysql.connector
 
 
 conn_obj = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="kalyan556",
-    database="expensive"
+    host="db_host",
+    user="db_user",
+    password="db_password",
+    database="db_name",
+    port="db_port"
 )
 
 cur_obj = conn_obj.cursor(dictionary=True)
 
 
 app = FastAPI()
+
+
+# CORS Middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.post("/expenses")
