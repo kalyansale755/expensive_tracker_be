@@ -44,9 +44,37 @@ try:
 
     print("✅ Database Connected Successfully - main.py:45")
 
+    
+    # =========================================
+    # CREATE TABLE IF NOT EXISTS
+    # =========================================
+
+    create_table_query = """
+    CREATE TABLE IF NOT EXISTS expenses (
+
+        id INT PRIMARY KEY AUTO_INCREMENT,
+
+        title VARCHAR(255) NOT NULL,
+
+        amount DECIMAL(10,2) NOT NULL,
+
+        category VARCHAR(100) NOT NULL,
+
+        expense_date DATE NOT NULL
+
+    )
+    """
+
+    cur_obj.execute(create_table_query)
+
+    conn_obj.commit()
+
+    print("✅ Expenses Table Ready - main.py:72")
+
+    
 except Exception as e:
 
-    print("❌ Database Connection Error - main.py:49")
+    print("❌ Database Connection Error - main.py:77")
     print(e)
 
     conn_obj = None
