@@ -1,14 +1,15 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import mysql.connector
+import os
 
 
 conn_obj = mysql.connector.connect(
-    host="db_host",
-    user="db_user",
-    password="db_password",
-    database="db_name",
-    port="db_port"
+    host=os.getenv("db_host"),
+    user=os.getenv("db_user"),
+    password=os.getenv("db_password"),
+    database=os.getenv("db_name"),
+    port=os.getenv("db_port")
 )
 
 cur_obj = conn_obj.cursor(dictionary=True)
